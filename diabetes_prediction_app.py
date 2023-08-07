@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeClassifier,export_text
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 
@@ -38,6 +38,7 @@ bmi = st.sidebar.number_input('Vücut Kitle İndeksi', value=0.0)
 diabetes_pedigree = st.sidebar.number_input('Diyabet Soyağacı Fonksiyonu', value=0.0)
 age = st.sidebar.number_input('Yaş', value=0)
 
+
 # Kullanıcının girdiği veriyi tahminle
 user_input = np.array([[pregnancies, glucose, blood_pressure, skin_thickness, insulin, bmi, diabetes_pedigree, age]])
 prediction = model.predict(user_input)
@@ -52,14 +53,31 @@ else:
 # Eğitim ve test kümesi boyutlarını göster
 train_records = len(x_train)
 test_records = len(x_test)
-st.write(f'Kullanılan Eğitim Kayıt Sayısı: {train_records}/{total_records}')
-# st.write(f'Kullanılan Test Kayıt Sayısı: {test_records}/{total_records}')
 
 # Model skorunu hesapla
 score = model.score(x_test, y_test)
-st.write('Model Doğruluk Oranı:', f'**{score:.2f}**')
-
 cv_scores = cross_val_score(model, x, y, cv=5)  # 5 katlı çapraz doğrulama
-st.write('Ortalama Doğruluk Oranı:', np.mean(cv_scores))
-st.write('Çapraz Doğrulama Skorları:', cv_scores)
+
+
+# Düğmeye tıklanınca ağacın metin tabanlı açıklamalarını göster/gizle
+show_tree = st.checkbox('Karar Ağacı Açıklamalarını Göster/Gizle')
+
+# Karar ağacı metin açıklamalarını göster
+if show_tree:
+    tree_rules = export_text(model, feature_names=x_train.columns.tolist())
+    st.code("Decision Tree Rules:\n" + tree_rules, language='text')
+
+# Düğmelere tıklanınca çapraz doğrulama skorlarını, kullanılan kayıt sayılarını ve model doğruluk oranını göster/gizle
+show_scores = st.checkbox('Skorları Göster/Gizle')
+
+# Çapraz doğrulama skorlarını göster
+if show_scores:
+    # Çapraz doğrulama skorları
+    st.write('Çapraz Doğrulama Skorları:', cv_scores)
+    
+    # Kullanılan kayıt sayıları
+    st.write(f'Kullanılan Eğitim Kayıt Sayısı: {train_records}/{total_records}')
+    st.write(f'Model Doğruluk Oranı: **{score:.2f}**')
+    st.write(f'Ortalama Doğruluk Oranı: {np.mean(cv_scores):.2f}')
+
 
