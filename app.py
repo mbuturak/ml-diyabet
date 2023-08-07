@@ -14,7 +14,7 @@ def main():
     age = st.slider("Yaş", 21, 90, 25)
 
      # Modeli yükle
-    with open("model.pkl", "rb") as model_file:
+    with open("./model.pkl", "rb") as model_file:
         model = pickle.load(model_file)
 
     # Tahmin fonksiyonunu çağırın
