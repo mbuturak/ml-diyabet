@@ -37,8 +37,8 @@ print("Model Doğruluk Oranı:", score)
 # Tahmin yapmak için örnek veri girişi.
 # Kaç adet hamilelik geçirdi?, Glikoz, Kan Basıncı, Deri Kalınlığı, İnsülin direnci, Vücut kitle indeksi, Diyabet Soyağacı Fonksiyonu, Yaş
 
-# 6,148,72,35,0,33.6,0.627,50 -> Diyabet hastası örneği
-# 2,135,85,26,0,25.6,0.124,23 -> Diyabet olmayan hasta örneği
+# 6 , 148 , 72 , 35 , 0 , 33.6 , 0.627 , 50 -> Diyabet hastası örneği
+# 2, 135 , 85 , 26 , 0 , 25.6 , 0.124 , 23 -> Diyabet olmayan hasta örneği
 
 new_data = np.array([[2,135,85,26,0,25.6,0.124,23]])
 prediction = model.predict(new_data)
