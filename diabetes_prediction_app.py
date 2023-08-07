@@ -60,5 +60,6 @@ score = model.score(x_test, y_test)
 st.write('Model Doğruluk Oranı:', f'**{score:.2f}**')
 
 cv_scores = cross_val_score(model, x, y, cv=5)  # 5 katlı çapraz doğrulama
-st.write('Çapraz Doğrulama Skorları:', cv_scores)
 st.write('Ortalama Doğruluk Oranı:', np.mean(cv_scores))
+st.write('Çapraz Doğrulama Skorları:', cv_scores)
+
