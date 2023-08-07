@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from login import main as login_main
 from sklearn.tree import DecisionTreeClassifier,export_text
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
