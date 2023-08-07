@@ -1,4 +1,5 @@
 import streamlit as st
+import pickle
 
 def main():
     st.title("Hamilelik ve Diyabet Riski Tahmin Arayüzü")
@@ -13,7 +14,7 @@ def main():
     diabetes_pedigree = st.slider("Diyabet Soyağacı Fonksiyonu", 0.078, 2.42, 0.3725)
     age = st.slider("Yaş", 21, 90, 25)
 
-     # Modeli yükle
+    # Modeli yükle
     with open("./model.pkl", "rb") as model_file:
         model = pickle.load(model_file)
 
