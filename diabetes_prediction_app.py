@@ -4,6 +4,8 @@ import numpy as np
 from sklearn.tree import DecisionTreeClassifier,export_text
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
+from sklearn.tree import plot_tree
+
 
 
 # Streamlit uygulamasını oluştur
@@ -64,8 +66,8 @@ show_tree = st.checkbox('Karar Ağacı Açıklamalarını Göster/Gizle')
 
 # Karar ağacı metin açıklamalarını göster
 if show_tree:
-    tree_rules = export_text(model, feature_names=x_train.columns.tolist())
-    st.code("Decision Tree Rules:\n" + tree_rules, language='text')
+     tree_rules = export_text(model, feature_names=x_train.columns.tolist())
+     st.code("Decision Tree Rules:\n" + tree_rules, language='text')
 
 # Düğmelere tıklanınca çapraz doğrulama skorlarını, kullanılan kayıt sayılarını ve model doğruluk oranını göster/gizle
 show_scores = st.checkbox('Skorları Göster/Gizle')
@@ -79,5 +81,22 @@ if show_scores:
     st.write(f'Kullanılan Eğitim Kayıt Sayısı: {train_records}/{total_records}')
     st.write(f'Model Doğruluk Oranı: **{score:.2f}**')
     st.write(f'Ortalama Doğruluk Oranı: {np.mean(cv_scores):.2f}')
+
+# Düğmeye tıklanınca ağacın görselleştirmesini göster/gizle
+show_tree_plot = st.checkbox('Karar Ağacı Görselleştirmesini Göster/Gizle')
+
+# Matplotlib'ı içe aktar
+import matplotlib.pyplot as plt
+
+# Karar ağacı görselleştirmesini göster
+if show_tree_plot:
+    st.set_option('deprecation.showPyplotGlobalUse', False)
+
+    # Görselin boyutunu ve çözünürlüğünü ayarla
+    plt.figure(figsize=(65, 35), dpi=300)
+    plot_tree(model, filled=True, feature_names=x_train.columns.tolist(), max_depth=3)
+
+    # Görselin çıktısını ayarla
+    st.pyplot(bbox_inches='tight')
 
 
