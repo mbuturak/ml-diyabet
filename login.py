@@ -6,27 +6,22 @@ import subprocess
 correct_username = "mbuturak"
 correct_password = "123456"
 
-def main():
-    # Streamlit arayüzünü oluştur
-    st.title("Giriş Ekranı")
-    
-    # Kullanıcı adı ve parola girişi
-    username = st.text_input("Kullanıcı Adı")
-    password = st.text_input("Parola", type="password")
+# Streamlit arayüzünü oluştur
+st.title("Giriş Ekranı")
 
-    # Giriş düğmesi
-    if st.button("Giriş"):
-        if username == correct_username and password == correct_password:
-            st.success("Giriş başarılı! Uygulamaya erişiminiz sağlandı.")
+# Kullanıcı adı ve parola girişi
+username = st.text_input("Kullanıcı Adı")
+password = st.text_input("Parola", type="password")
 
-            # diabetes_prediction_app.py dosyasını çalıştır
-            subprocess.run(["streamlit", "run", "diabetes_prediction_app.py"])
+# Giriş düğmesi
+if st.button("Giriş"):
+    if username == correct_username and password == correct_password:
+        st.success("Giriş başarılı! Uygulamaya erişiminiz sağlandı.")
 
-            # Uygulama sonlandığında buraya dönecek
-            st.warning("Uygulama sonlandı.")
-        else:
-            st.error("Kullanıcı adı veya parola yanlış. Lütfen tekrar deneyin.")
+        # diabetes_prediction_app.py dosyasını çalıştır
+        subprocess.run(["streamlit", "run", "diabetes_prediction_app.py"])
 
-if __name__ == "__main__":
-    if main():
+        # Uygulama sonlandığında buraya dönecek
         st.warning("Uygulama sonlandı.")
+    else:
+        st.error("Kullanıcı adı veya parola yanlış. Lütfen tekrar deneyin.")
