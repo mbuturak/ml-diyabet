@@ -66,7 +66,7 @@ if st.sidebar.button('Hesapla'):
         
         # # Modeli yeniden eğit
         # y = diabetes[['Outcome']]
-        # x = diabetes.drop(columns=['Outcome'], axis=1)
+        # x = diabetes.drop(columns=['Outcome'], axis=1)""
         # x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.9, random_state=34)
         # model.fit(x_train, y_train)
 
