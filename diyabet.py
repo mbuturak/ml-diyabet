@@ -40,10 +40,6 @@ print("Model Doğruluk Oranı:", score)
 # 6,148,72,35,0,33.6,0.627,50 -> Diyabet hastası örneği
 # 2,135,85,26,0,25.6,0.124,23 -> Diyabet olmayan hasta örneği
 
-#new_data = np.array([[2,135,85,26,0,25.6,0.124,23]])
-#prediction = model.predict(new_data)
-
-user_input = input("Verileri virgülle ayırarak girin (örn: 1,2,3,0.4): ")
-new_data = np.array([list(map(float, user_input.split(',')))])
+new_data = np.array([[2,135,85,26,0,25.6,0.124,23]])
 prediction = model.predict(new_data)
 print("Tahmin Sonucu:", prediction)
