@@ -105,20 +105,20 @@ if show_tree_plot:
     st.pyplot(bbox_inches='tight')
 
 
-def predict_diabetes(pregnancies, glucose, blood_pressure, skin_thickness, insulin, bmi, diabetes_pedigree, age):
-    try:
-        # Modeli eğitiyorsanız bu kısmı bu fonksiyona taşıyabilirsiniz
-        model = DecisionTreeClassifier(max_depth=5, min_samples_split=5, min_samples_leaf=2)
-        model.fit(x_train, y_train)  # x_train ve y_train verileri kullanılarak eğitim yapılıyor
+# def predict_diabetes(pregnancies, glucose, blood_pressure, skin_thickness, insulin, bmi, diabetes_pedigree, age):
+#     try:
+#         # Modeli eğitiyorsanız bu kısmı bu fonksiyona taşıyabilirsiniz
+#         model = DecisionTreeClassifier(max_depth=5, min_samples_split=5, min_samples_leaf=2)
+#         model.fit(x_train, y_train)  # x_train ve y_train verileri kullanılarak eğitim yapılıyor
 
-        user_input = np.array([[pregnancies, glucose, blood_pressure, skin_thickness, insulin, bmi, diabetes_pedigree, age]])
-        prediction = model.predict(user_input)
+#         user_input = np.array([[pregnancies, glucose, blood_pressure, skin_thickness, insulin, bmi, diabetes_pedigree, age]])
+#         prediction = model.predict(user_input)
 
-        if prediction[0] == 0:
-            result = "Diyabet değil"
-        else:
-            result = "Diyabet"
+#         if prediction[0] == 0:
+#             result = "Diyabet değil"
+#         else:
+#             result = "Diyabet"
 
-        return result
-    except Exception as e:
-        return str(e)
+#         return result
+#     except Exception as e:
+#         return str(e)
