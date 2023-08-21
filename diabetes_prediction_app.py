@@ -7,11 +7,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 from sklearn.tree import plot_tree
 
-
-# Streamlit uygulamasını oluştur
-st.title('Diyabet Teşhisi Uygulaması')
-st.write('Bu uygulama ile diyabet teşhisi yapabilirsiniz.')
-
 # Verileri yükle (kök dizininden)
 csv_path = './diabetes.csv'  # Diabetes veri kümesinin doğru yoluyla değiştirin
 diabetes = pd.read_csv(csv_path)
@@ -24,6 +19,10 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.9, random
 # Modeli eğit
 model = DecisionTreeClassifier(max_depth=5, min_samples_split=5, min_samples_leaf=2)
 model.fit(x_train, y_train)
+
+# Streamlit uygulamasını oluştur
+st.title('Diyabet Teşhisi Uygulaması')
+st.write('Bu uygulama ile diyabet teşhisi yapabilirsiniz.')
 
 # Kullanıcı girişini al
 st.sidebar.title('Diyabet Riski Tahmini')
@@ -69,40 +68,40 @@ test_records = len(x_test)
 score = model.score(x_test, y_test)
 cv_scores = cross_val_score(model, x, y, cv=5)  # 5 katlı çapraz doğrulama
 
-# Düğmeye tıklanınca ağacın metin tabanlı açıklamalarını göster/gizle
-show_tree = st.checkbox('Karar Ağacı Açıklamalarını Göster/Gizle')
+# # Düğmeye tıklanınca ağacın metin tabanlı açıklamalarını göster/gizle
+# show_tree = st.checkbox('Karar Ağacı Açıklamalarını Göster/Gizle')
 
-#Karar ağacı metin açıklamalarını göster
-if show_tree:
-     tree_rules = export_text(model, feature_names=x_train.columns.tolist())
-     st.code("Decision Tree Rules:\n" + tree_rules, language='text')
+# #Karar ağacı metin açıklamalarını göster
+# if show_tree:
+#      tree_rules = export_text(model, feature_names=x_train.columns.tolist())
+#      st.code("Decision Tree Rules:\n" + tree_rules, language='text')
 
-# Düğmelere tıklanınca çapraz doğrulama skorlarını, kullanılan kayıt sayılarını ve model doğruluk oranını göster/gizle
-show_scores = st.checkbox('Skorları Göster/Gizle')
+# # Düğmelere tıklanınca çapraz doğrulama skorlarını, kullanılan kayıt sayılarını ve model doğruluk oranını göster/gizle
+# show_scores = st.checkbox('Skorları Göster/Gizle')
 
-# Çapraz doğrulama skorlarını göster
-if show_scores:
-    # Çapraz doğrulama skorları
-    st.write('Çapraz Doğrulama Skorları:', cv_scores)
+# # Çapraz doğrulama skorlarını göster
+# if show_scores:
+#     # Çapraz doğrulama skorları
+#     st.write('Çapraz Doğrulama Skorları:', cv_scores)
     
-    # Kullanılan kayıt sayıları
-    st.write(f'Kullanılan Eğitim Kayıt Sayısı: {train_records}/{total_records}')
-    st.write(f'Model Doğruluk Oranı: **{score:.2f}**')
-    st.write(f'Ortalama Doğruluk Oranı: {np.mean(cv_scores):.2f}')
+#     # Kullanılan kayıt sayıları
+#     st.write(f'Kullanılan Eğitim Kayıt Sayısı: {train_records}/{total_records}')
+#     st.write(f'Model Doğruluk Oranı: **{score:.2f}**')
+#     st.write(f'Ortalama Doğruluk Oranı: {np.mean(cv_scores):.2f}')
 
-# Düğmeye tıklanınca ağacın görselleştirmesini göster/gizle
-show_tree_plot = st.checkbox('Karar Ağacı Görselleştirmesini Göster/Gizle')
+# # Düğmeye tıklanınca ağacın görselleştirmesini göster/gizle
+# show_tree_plot = st.checkbox('Karar Ağacı Görselleştirmesini Göster/Gizle')
 
-# Karar ağacı görselleştirmesini göster
-if show_tree_plot:
-    st.set_option('deprecation.showPyplotGlobalUse', False)
+# # Karar ağacı görselleştirmesini göster
+# if show_tree_plot:
+#     st.set_option('deprecation.showPyplotGlobalUse', False)
 
-    # Görselin boyutunu ve çözünürlüğünü ayarla
-    plt.figure(figsize=(65, 35), dpi=300)
-    plot_tree(model, filled=True, feature_names=x_train.columns.tolist(), max_depth=3)
+#     # Görselin boyutunu ve çözünürlüğünü ayarla
+#     plt.figure(figsize=(65, 35), dpi=300)
+#     plot_tree(model, filled=True, feature_names=x_train.columns.tolist(), max_depth=3)
 
-    # Görselin çıktısını ayarla
-    st.pyplot(bbox_inches='tight')
+#     # Görselin çıktısını ayarla
+#     st.pyplot(bbox_inches='tight')
 
 
 # def predict_diabetes(pregnancies, glucose, blood_pressure, skin_thickness, insulin, bmi, diabetes_pedigree, age):
