@@ -56,20 +56,6 @@ if st.sidebar.button('Hesapla'):
         else:
             st.write('Tahmin Sonucu:', f'<span style="color:green;font-size:20px">Diyabet riski taşımamaktasınız</span>', unsafe_allow_html=True)
 
-        # # Yeni kayıt eklemek ve modeli yeniden eğitmek
-        # new_record = [pregnancies, glucose, blood_pressure, skin_thickness, insulin, bmi, diabetes_pedigree, age, prediction[0]]
-        # new_record_df = pd.DataFrame([new_record], columns=diabetes.columns)
-        # diabetes = diabetes.append(new_record_df, ignore_index=True)
-        
-        # # Yeni kaydı CSV dosyasına ekle
-        # diabetes.to_csv(csv_path, index=False)
-        
-        # # Modeli yeniden eğit
-        # y = diabetes[['Outcome']]
-        # x = diabetes.drop(columns=['Outcome'], axis=1)
-        # x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.9, random_state=34)
-        # model.fit(x_train, y_train)
-
 
 # Veri kümesinin boyutlarını göster
 total_records = len(diabetes)
